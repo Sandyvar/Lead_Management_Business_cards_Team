@@ -1,10 +1,28 @@
-.env
-.venv/
-venv/
-__pycache__/
-*.py[cod]
-*.sqlite3
-db.sqlite3
-staticfiles/
-media/
+# Target build directory
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.log.*
+
+# IMPORTANT: Exclude all PDF and specification documents
+*.pdf
+*.PDF
+Backend allocation document.pdf
+FUNCTIONAL REQUIREMENTS.pdf
+SOFTWARE REQUIREMENTS.pdf

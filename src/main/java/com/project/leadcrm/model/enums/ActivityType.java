@@ -1,0 +1,18 @@
+package com.project.leadcrm.model.enums;
+
+public enum ActivityType {
+    LEAD_CREATED,
+    STATUS_CHANGED,
+    PRIORITY_UPDATED,
+    NOTE_ADDED,
+    ASSIGNED_TO_EMPLOYEE,
+    FOLLOWUP_SCHEDULED,
+    FOLLOWUP_COMPLETED,
+    CALL_LOGGED,
+    EMAIL_SENT,
+    WHATSAPP_MESSAGE_SENT,
+    QR_CODE_SCANNED,
+    CARD_VIEWED,
+    CONVERTED_TO_CUSTOMER,
+    SCORE_UPDATED
+}
