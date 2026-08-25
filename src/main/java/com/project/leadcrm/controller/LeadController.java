@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/leads")
+@RequestMapping("/api/leads")
 public class LeadController {
 
     private final LeadService leadService;
@@ -42,7 +42,7 @@ public class LeadController {
     @PostMapping
     ResponseEntity<LeadResponse> create(@Valid @RequestBody LeadRequest request) {
         LeadResponse response = leadService.create(request);
-        return ResponseEntity.created(URI.create("/api/v1/leads/" + response.id())).body(response);
+        return ResponseEntity.created(URI.create("/api/leads/" + response.id())).body(response);
     }
 
     @PutMapping("/{id}")

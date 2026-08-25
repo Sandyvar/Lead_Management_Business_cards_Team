@@ -8,8 +8,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.startsWith;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,18 +38,69 @@ class LeadControllerTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/leads")
+        mockMvc.perform(post("/api/leads")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
                 .andExpect(status().isCreated())
-                .andExpect(header().string("Location", "/api/v1/leads/1"))
+                .andExpect(header().string("Location", startsWith("/api/leads/")))
+                .andExpect(jsonPath("$.id", notNullValue()))
                 .andExpect(jsonPath("$.name", is("Avery Stone")))
                 .andExpect(jsonPath("$.email", is("avery@example.com")))
                 .andExpect(jsonPath("$.status", is("NEW")));
 
-        mockMvc.perform(get("/api/v1/leads"))
+        mockMvc.perform(get("/api/leads"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].email", is("avery@example.com")));
+    }
+
+    @Test
+    void updatesAndDeletesLead() throws Exception {
+        String createPayload = """
+                {
+                  "name": "Blair Kim",
+                  "email": "blair@example.com",
+                  "phone": "+15555550124",
+                  "company": "Northstar",
+                  "status": "NEW",
+                  "notes": "Requested a follow-up"
+                }
+                """;
+
+        String location = mockMvc.perform(post("/api/leads")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(createPayload))
+                .andExpect(status().isCreated())
+                .andReturn()
+                .getResponse()
+                .getHeader("Location");
+
+        String updatePayload = """
+                {
+                  "name": "Blair Kim",
+                  "email": "blair@example.com",
+                  "phone": "+15555550124",
+                  "company": "Northstar",
+                  "status": "QUALIFIED",
+                  "notes": "Demo scheduled"
+                }
+                """;
+
+        mockMvc.perform(put(location)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatePayload))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", is("QUALIFIED")))
+                .andExpect(jsonPath("$.notes", is("Demo scheduled")));
+
+        mockMvc.perform(get(location))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.company", is("Northstar")));
+
+        mockMvc.perform(delete(location))
+                .andExpect(status().isNoContent());
+
+        mockMvc.perform(get(location))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -57,7 +112,7 @@ class LeadControllerTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/leads")
+        mockMvc.perform(post("/api/leads")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
                 .andExpect(status().isBadRequest())

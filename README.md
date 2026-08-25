@@ -54,11 +54,11 @@ The API starts on `http://localhost:8080`.
 Useful endpoints:
 
 - `GET /actuator/health`
-- `GET /api/v1/leads`
-- `POST /api/v1/leads`
-- `GET /api/v1/leads/{id}`
-- `PUT /api/v1/leads/{id}`
-- `DELETE /api/v1/leads/{id}`
+- `GET /api/leads`
+- `POST /api/leads`
+- `GET /api/leads/{id}`
+- `PUT /api/leads/{id}`
+- `DELETE /api/leads/{id}`
 - `GET /api/v1/users`
 - `POST /api/v1/users`
 - `GET /api/v1/users/{id}`
@@ -68,7 +68,7 @@ Useful endpoints:
 Example create request:
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/leads \
+curl -X POST http://localhost:8080/api/leads \
   -H 'Content-Type: application/json' \
   -d '{
     "name": "Avery Stone",
