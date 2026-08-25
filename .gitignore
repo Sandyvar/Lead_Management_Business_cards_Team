@@ -20,9 +20,4 @@ Thumbs.db
 *.log
 *.log.*
 
-# IMPORTANT: Exclude all PDF and specification documents
-*.pdf
-*.PDF
-Backend allocation document.pdf
-FUNCTIONAL REQUIREMENTS.pdf
-SOFTWARE REQUIREMENTS.pdf
+
