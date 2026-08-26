@@ -207,4 +207,44 @@ public class LeadServiceImpl implements LeadService {
         }
         leadRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PipelineBoardDto getPipelineBoard() {
+        List<Lead> allLeads = leadRepository.findAll();
+
+        java.util.Map<LeadStatus, List<Lead>> leadsByStatus = allLeads.stream()
+                .collect(Collectors.groupingBy(Lead::getLeadStatus));
+
+        List<PipelineStageGroupDto> stageGroups = java.util.Arrays.stream(LeadStatus.values())
+                .map(status -> {
+                    List<Lead> stageLeads = leadsByStatus.getOrDefault(status, java.util.Collections.emptyList());
+                    double stageValue = stageLeads.stream()
+                            .mapToDouble(l -> l.getLeadValue() != null ? l.getLeadValue() : 0.0)
+                            .sum();
+
+                    List<LeadDto> dtos = stageLeads.stream()
+                            .map(LeadDto::fromEntity)
+                            .collect(Collectors.toList());
+
+                    return PipelineStageGroupDto.builder()
+                            .stage(status)
+                            .stageDisplayName(status.name().replace('_', ' '))
+                            .leadCount(stageLeads.size())
+                            .totalValue(stageValue)
+                            .leads(dtos)
+                            .build();
+                })
+                .collect(Collectors.toList());
+
+        double grandTotalValue = allLeads.stream()
+                .mapToDouble(l -> l.getLeadValue() != null ? l.getLeadValue() : 0.0)
+                .sum();
+
+        return PipelineBoardDto.builder()
+                .totalLeads(allLeads.size())
+                .totalPipelineValue(grandTotalValue)
+                .stages(stageGroups)
+                .build();
+    }
 }

@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "leadcrm-api-collection-v1",
+		"name": "SaaS Lead CRM - Complete API Test Suite (Day 1 - Day 7)",
+		"description": "Comprehensive Postman test collection for Lead Management, Inbound Scoring Engine, Timeline, and Notifications.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Lead Management (Day 1-3 & Kanban)",
+			"item": [
+				{
+					"name": "GET All Leads",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/leads",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Lead by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Create New Lead",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerName\": \"Sunil Kashyap\",\n  \"companyName\": \"Solaris Energy\",\n  \"mobile\": \"+919876500010\",\n  \"email\": \"sunil@solaris.com\",\n  \"city\": \"Pune\",\n  \"state\": \"Maharashtra\",\n  \"country\": \"India\",\n  \"requirement\": \"Looking for 10 digital visiting cards for field sales team\",\n  \"leadSource\": \"MANUAL_ENTRY\",\n  \"leadCategory\": \"WARM\",\n  \"leadStatus\": \"NEW\",\n  \"priority\": \"HIGH\",\n  \"leadValue\": 60000.0,\n  \"assignedEmployeeId\": 1,\n  \"companyId\": 1,\n  \"notes\": \"Referred by partner agency\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/leads",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Move Lead Stage (Pipeline Transition)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"PROPOSAL_SENT\",\n  \"employeeId\": 1,\n  \"note\": \"Sent tailored proposal covering CRM + 10 Digital Cards\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/1/stage",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "1", "stage"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Assign Lead to Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": 2,\n  \"assignedByEmployeeId\": 1,\n  \"note\": \"Handing over negotiation to Sales Manager\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/1/assign",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "1", "assign"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Kanban Sales Pipeline Board (Day 4-7)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/pipeline",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "pipeline"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Inbound Lead Capture & Scoring Engine (Day 4-7)",
+			"item": [
+				{
+					"name": "POST Capture Lead (QR Scan + WhatsApp + Enquiry -> WARM 35 pts)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerName\": \"Rohit Sharma\",\n  \"companyName\": \"Blue Horizon Ventures\",\n  \"mobile\": \"+919876543288\",\n  \"email\": \"rohit@bluehorizon.com\",\n  \"city\": \"Mumbai\",\n  \"state\": \"Maharashtra\",\n  \"country\": \"India\",\n  \"requirement\": \"Scanned QR code at Tech Summit and submitted enquiry\",\n  \"source\": \"QR_CODE\",\n  \"assignedEmployeeId\": 1,\n  \"companyId\": 1,\n  \"isQrScan\": true,\n  \"hasWhatsAppClick\": true,\n  \"isDirectEnquiryForm\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/capture",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "capture"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Capture High-Intent Lead (Meeting + Proposal -> HOT 70 pts)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerName\": \"Ananya Deshmukh\",\n  \"companyName\": \"Global Enterprise Corp\",\n  \"mobile\": \"+919811002233\",\n  \"email\": \"ananya@globalcorp.com\",\n  \"city\": \"Bangalore\",\n  \"state\": \"Karnataka\",\n  \"country\": \"India\",\n  \"requirement\": \"Urgent meeting requested for 100 enterprise CRM licenses\",\n  \"source\": \"DIGITAL_CARD\",\n  \"assignedEmployeeId\": 1,\n  \"companyId\": 1,\n  \"isProposalRequested\": true,\n  \"isMeetingRequested\": true,\n  \"isDirectEnquiryForm\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/capture",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "capture"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Activity Timeline (Day 1-3)",
+			"item": [
+				{
+					"name": "GET Lead Activity Timeline",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/1/timeline",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "1", "timeline"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Add Internal Operational Note to Timeline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": 1,\n  \"note\": \"Discussed budget expectations on phone. Client confirmed budget is approved.\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/1/timeline/note",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "leads", "1", "timeline", "note"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Notifications Engine (Day 1-3)",
+			"item": [
+				{
+					"name": "GET Employee Notifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/employee/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications", "employee", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Employee Unread Notification Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/employee/1/unread-count",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications", "employee", "1", "unread-count"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Mark All Employee Notifications as Read",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/employee/1/read-all",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications", "employee", "1", "read-all"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

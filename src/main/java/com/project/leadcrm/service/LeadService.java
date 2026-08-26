@@ -25,4 +25,6 @@ public interface LeadService {
     LeadDto assignLead(Long id, AssignLeadDto assignDto);
 
     void deleteLead(Long id);
+
+    com.project.leadcrm.dto.PipelineBoardDto getPipelineBoard();
 }

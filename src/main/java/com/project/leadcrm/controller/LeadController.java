@@ -35,6 +35,13 @@ public class LeadController {
         return ResponseEntity.ok(ApiResponse.success("Leads retrieved successfully", leads));
     }
 
+    @GetMapping("/pipeline")
+    @Operation(summary = "Get Kanban sales pipeline board (all stages grouped with counts, totals, and leads)")
+    public ResponseEntity<ApiResponse<PipelineBoardDto>> getPipelineBoard() {
+        PipelineBoardDto board = leadService.getPipelineBoard();
+        return ResponseEntity.ok(ApiResponse.success("Pipeline Kanban board retrieved successfully", board));
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get lead details by ID")
     public ResponseEntity<ApiResponse<LeadDto>> getLeadById(@PathVariable Long id) {

@@ -25,4 +25,8 @@ public interface LeadRepository extends JpaRepository<Lead, Long> {
 
     @Query("SELECT l.leadStatus, COUNT(l) FROM Lead l GROUP BY l.leadStatus")
     List<Object[]> countLeadsByStatus();
+
+    java.util.Optional<Lead> findByMobile(String mobile);
+
+    java.util.Optional<Lead> findFirstByMobileOrEmail(String mobile, String email);
 }
