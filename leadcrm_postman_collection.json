@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "leadcrm-api-collection-v1",
-		"name": "SaaS Lead CRM - Complete API Test Suite (Day 1 - Day 7)",
-		"description": "Comprehensive Postman test collection for Lead Management, Inbound Scoring Engine, Timeline, and Notifications.",
+		"_postman_id": "leadcrm-api-collection-v2",
+		"name": "SaaS Lead CRM - Complete API Test Suite",
+		"description": "Comprehensive Postman test collection for Lead Management, Inbound Scoring Engine, Activity Timeline, Pipeline, and Notifications.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "1. Lead Management (Day 1-3 & Kanban)",
+			"name": "1. Lead Management & Kanban",
 			"item": [
 				{
 					"name": "GET All Leads",
@@ -16,8 +16,37 @@
 						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/api/leads",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Leads Filtered by Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/leads?status=NEW",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "NEW"
+								}
+							]
 						}
 					},
 					"response": []
@@ -29,8 +58,34 @@
 						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/1",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "1"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Leads by Employee ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/employee/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"employee",
+								"1"
+							]
 						}
 					},
 					"response": []
@@ -51,8 +106,13 @@
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/leads",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads"
+							]
 						}
 					},
 					"response": []
@@ -73,8 +133,15 @@
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/1/stage",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "1", "stage"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"1",
+								"stage"
+							]
 						}
 					},
 					"response": []
@@ -95,21 +162,53 @@
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/1/assign",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "1", "assign"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"1",
+								"assign"
+							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET Kanban Sales Pipeline Board (Day 4-7)",
+					"name": "GET Kanban Sales Pipeline Board",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/pipeline",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "pipeline"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"pipeline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Lead by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/leads/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"1"
+							]
 						}
 					},
 					"response": []
@@ -117,7 +216,7 @@
 			]
 		},
 		{
-			"name": "2. Inbound Lead Capture & Scoring Engine (Day 4-7)",
+			"name": "2. Inbound Lead Capture & Scoring",
 			"item": [
 				{
 					"name": "POST Capture Lead (QR Scan + WhatsApp + Enquiry -> WARM 35 pts)",
@@ -135,8 +234,14 @@
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/capture",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "capture"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"capture"
+							]
 						}
 					},
 					"response": []
@@ -157,8 +262,14 @@
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/capture",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "capture"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"capture"
+							]
 						}
 					},
 					"response": []
@@ -166,7 +277,7 @@
 			]
 		},
 		{
-			"name": "3. Activity Timeline (Day 1-3)",
+			"name": "3. Activity Timeline",
 			"item": [
 				{
 					"name": "GET Lead Activity Timeline",
@@ -175,14 +286,21 @@
 						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/1/timeline",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "1", "timeline"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"1",
+								"timeline"
+							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "POST Add Internal Operational Note to Timeline",
+					"name": "POST Add Note to Lead Timeline",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -197,8 +315,41 @@
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/leads/1/timeline/note",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "leads", "1", "timeline", "note"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"leads",
+								"1",
+								"timeline",
+								"note"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Recent CRM Activity Stream",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/timeline/recent?limit=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"timeline",
+								"recent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
 						}
 					},
 					"response": []
@@ -206,30 +357,113 @@
 			]
 		},
 		{
-			"name": "4. Notifications Engine (Day 1-3)",
+			"name": "4. Notifications Engine",
 			"item": [
 				{
-					"name": "GET Employee Notifications",
+					"name": "POST Trigger Notification",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": 1,\n  \"title\": \"Urgent High-Intent Lead Assigned\",\n  \"message\": \"Ananya Deshmukh requested a meeting for enterprise CRM licenses.\",\n  \"type\": \"IN_APP\",\n  \"referenceId\": 1,\n  \"referenceType\": \"LEAD\"\n}"
+						},
 						"url": {
-							"raw": "{{baseUrl}}/api/notifications/employee/1",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "notifications", "employee", "1"]
+							"raw": "{{baseUrl}}/api/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"notifications"
+							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET Employee Unread Notification Count",
+					"name": "GET Employee All Notifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/employee/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"employee",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Employee Unread Notifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/employee/1/unread",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"employee",
+								"1",
+								"unread"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Employee Unread Count Badge",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/api/notifications/employee/1/unread-count",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "notifications", "employee", "1", "unread-count"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"employee",
+								"1",
+								"unread-count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Mark Notification as Read",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/1/read",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"1",
+								"read"
+							]
 						}
 					},
 					"response": []
@@ -241,8 +475,16 @@
 						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/api/notifications/employee/1/read-all",
-							"host": ["{{baseUrl}}"],
-							"path": ["api", "notifications", "employee", "1", "read-all"]
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"employee",
+								"1",
+								"read-all"
+							]
 						}
 					},
 					"response": []
