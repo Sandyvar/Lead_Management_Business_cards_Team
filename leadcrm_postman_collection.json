@@ -490,6 +490,184 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "5. Follow-ups & Overdue Alerts",
+			"item": [
+				{
+					"name": "POST Schedule Follow-up",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"leadId\": 1,\n  \"employeeId\": 1,\n  \"followupDate\": \"2026-09-01T15:30:00\",\n  \"followupType\": \"CALL\",\n  \"notes\": \"Follow up on proposal budget discussion\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/followups",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"followups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Today's Follow-ups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/followups/today",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"followups",
+								"today"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Overdue Follow-ups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/followups/overdue",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"followups",
+								"overdue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Follow-ups by Lead ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/followups/lead/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"followups",
+								"lead",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Follow-ups by Employee ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/followups/employee/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"followups",
+								"employee",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Complete Follow-up",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"outcomeNotes\": \"Client agreed to move forward with enterprise demo next week\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/followups/1/complete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"followups",
+								"1",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Trigger Overdue Alert Scan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/alerts/overdue/scan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"alerts",
+								"overdue",
+								"scan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Active Overdue Alerts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/alerts/overdue",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"alerts",
+								"overdue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [

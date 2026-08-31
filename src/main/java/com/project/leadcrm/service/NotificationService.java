@@ -12,6 +12,10 @@ public interface NotificationService {
      */
     NotificationResponseDto sendNotification(NotificationRequestDto requestDto);
 
+    default NotificationResponseDto createNotification(NotificationRequestDto requestDto) {
+        return sendNotification(requestDto);
+    }
+
     /**
      * Retrieve all notifications for a given employee in reverse chronological order.
      */

@@ -23,6 +23,10 @@ public class ApiResponse<T> {
     @Builder.Default
     private LocalDateTime timestamp = LocalDateTime.now();
 
+    public static <T> ApiResponse<T> success(T data) {
+        return success("Operation successful", data);
+    }
+
     public static <T> ApiResponse<T> success(String message, T data) {
         return ApiResponse.<T>builder()
                 .success(true)
